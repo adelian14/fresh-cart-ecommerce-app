@@ -20,7 +20,7 @@ export default function CheckOut() {
       phone: '',
       city:''
     },
-    onSubmit: () => handleCheckout(id, 'http://localhost:5173')
+    onSubmit: () => handleCheckout(id, 'https://fresh-cart-ecommerce-app-delta.vercel.app')
   });
 
   async function handleCheckout(cartId, url) {
