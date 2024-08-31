@@ -6,6 +6,7 @@ import { baseurl, userTokenKey } from '../../constansts';
 import { useNavigate, Link } from 'react-router-dom';
 import * as Yup from 'yup'
 import { UserContext } from '../../Context/UserContext';
+import toast from 'react-hot-toast';
 
 export default function Register() {
 
@@ -24,10 +25,11 @@ export default function Register() {
         navigate('/');
         localStorage.setItem(userTokenKey, apiResponse?.data?.token);
         setUserLogin(apiResponse?.data?.token);
+        toast.success('Account created successfully');
       })
       .catch((error) => {
         setLoading(false);
-        setApiError(error?.response?.data?.message);
+        toast.error(error?.response?.data?.message);
       })
   }
 

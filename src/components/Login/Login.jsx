@@ -6,6 +6,7 @@ import { baseurl, userTokenKey } from '../../constansts';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup'
 import { UserContext } from '../../Context/UserContext';
+import toast from 'react-hot-toast';
 
 export default function Login() {
 
@@ -23,10 +24,11 @@ export default function Login() {
         navigate('/');
         localStorage.setItem(userTokenKey, apiResponse?.data?.token);
         setUserLogin(apiResponse?.data?.token);
+        toast.success('Welcome back, '+values?.email);
       })
       .catch((error) => {
         setLoading(false);
-        setApiError(error?.response?.data?.message);
+        toast.error(error?.response?.data?.message);
       })
   }
 
@@ -77,7 +79,10 @@ export default function Login() {
         </div>
         <div className='flex items-center gap-3 flex-wrap'>
           <button type="submit" className="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-cente">{Loading ? <i className='fas fa-spinner fa-spin'></i> : 'Login'}</button>
-          <p>Don't have an account? <Link to={'/register'} className='font-semibold text-green-700 underline cursor-pointer'>Register Now</Link></p>
+          <div className='flex flex-wrap justify-between flex-1'>
+            <p>Don't have an account? <Link to={'/register'} className='font-semibold text-green-700 underline cursor-pointer'>Register Now</Link></p>
+            <p><Link to={'/forgotpassword'} className='font-semibold text-green-700 underline cursor-pointer'>Forgot password?</Link></p>
+          </div>
         </div>
       </form>
     </div>

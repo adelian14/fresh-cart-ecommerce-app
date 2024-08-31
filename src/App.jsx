@@ -21,6 +21,7 @@ import { CartCounterContextProvider } from './Context/CartCounterContext'
 import { Toaster } from 'react-hot-toast'
 import CheckOut from './components/CheckOut/CheckOut'
 import Orders from './components/Orders/Orders'
+import ForgetPassword from './components/ForgetPassword/ForgetPassword'
 
 let query = new QueryClient();
 
@@ -34,6 +35,7 @@ let routes = createBrowserRouter([
       { path: '/cart', element: <ProtectedRoute> <Cart /> </ProtectedRoute> },
       { path: '/checkout/:id', element: <ProtectedRoute> <CheckOut /> </ProtectedRoute> },
       { path: '/allorders', element: <ProtectedRoute> <Orders /> </ProtectedRoute> },
+      { path: '/forgotpassword', element:  <ForgetPassword /> },
       { path: '/products', element: <Products /> },
       { path: '/productdetails/:id', element: <ProductDetails /> },
       { path: '/about', element: <About /> },

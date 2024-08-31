@@ -5,7 +5,7 @@ import Logo from '../../assets/freshcart-logo.svg'
 import { UserContext } from '../../Context/UserContext';
 import { userTokenKey } from '../../constansts';
 import { CartCounterContext } from '../../Context/CartCounterContext';
-
+import toast from 'react-hot-toast';
 export default function Navbar() {
   useEffect(() => {
 
@@ -22,6 +22,7 @@ export default function Navbar() {
   function handleLogout(){
     localStorage.removeItem(userTokenKey);
     setUserLogin(null);
+    toast.success('See you soon');
   }
 
   return <nav className='bg-gray-200 fixed top-0 left-0 right-0 py-4 lg:py-2 z-50'>
