@@ -47,11 +47,11 @@ export default function CartRow({ product, setCart, setCounter }) {
   }, []);
 
   return <>
-    <tr className=" border-b hover:bg-gray-200 duration-300">
+    <tr className=" border-b border-cream-200 last:border-0 hover:bg-cream-50 duration-300">
       <td className="p-4 md:w-36">
-        <img src={product?.product?.imageCover} className="w-16 md:w-28 md:h-28 object-cover object-center max-w-full max-h-full" alt={product?.product?.title}></img>
+        <img src={product?.product?.imageCover} className="w-16 md:w-24 md:h-24 object-cover object-center rounded-2xl border border-cream-200" alt={product?.product?.title}></img>
       </td>
-      <td className="px-6 py-4 font-semibold text-gray-900 max-w-80">
+      <td className="px-6 py-4 font-display font-semibold text-forest-800 max-w-80">
         {`${product?.product?.brand?.name} ${product?.product?.title}`}
       </td>
       <td className="px-6 py-4">
@@ -60,20 +60,20 @@ export default function CartRow({ product, setCart, setCounter }) {
             ()=>{
               updateCartCount(product?.product?.id,product?.count-1);
             }
-          } className="inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200" type="button">
+          } className="inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-7 w-7 text-forest-700 bg-cream-50 border border-cream-200 rounded-full focus:outline-none hover:bg-forest-50 hover:border-forest-300 transition-colors" type="button">
             <span className="sr-only">Quantity button</span>
             <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
               <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h16" />
             </svg>
           </button>
           <div>
-            <span className='font-semibold text-gray-900'>{product?.count} </span>
+            <span className='font-semibold text-forest-800 w-6 text-center inline-block'>{product?.count} </span>
           </div>
           <button onClick={
             ()=>{
               updateCartCount(product?.product?.id,product?.count+1);
             }
-          }className="inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200" type="button">
+          }className="inline-flex items-center justify-center h-7 w-7 p-1 ms-3 text-sm font-medium text-forest-700 bg-cream-50 border border-cream-200 rounded-full focus:outline-none hover:bg-forest-50 hover:border-forest-300 transition-colors" type="button">
             <span className="sr-only">Quantity button</span>
             <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
               <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 1v16M1 9h16" />
@@ -81,15 +81,15 @@ export default function CartRow({ product, setCart, setCounter }) {
           </button>
         </div>
       </td>
-      <td className="px-6 py-4 font-semibold text-gray-900">
+      <td className="px-6 py-4 font-display font-semibold text-forest-700">
         {product?.price} EGP
       </td>
       <td className="px-6 py-4">
-        <a href="#" className="font-medium text-red-600 hover:underline" onClick={
+        <button className="inline-flex items-center gap-1.5 font-semibold text-clay-600 hover:text-clay-700 transition-colors" onClick={
           ()=>{
             deleteCartProduct(product?.product?.id);
           }
-        }>Remove</a>
+        }><i className='fas fa-trash-can'></i> Remove</button>
       </td>
     </tr>
   </>

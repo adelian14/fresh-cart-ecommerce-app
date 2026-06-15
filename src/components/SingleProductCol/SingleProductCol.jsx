@@ -28,16 +28,18 @@ export default function SingleProductCol({ isRelated, product, related, layout }
       <div onClick={() => {
         setRelatedProducts(related.map(p => p));
         navigate(`/productdetails/${product?.id}`);
-      }} className='flex flex-col overflow-hidden border-2 border-gray-200 rounded-lg h-full cursor-pointer'>
-        <img className={`w-full ${isRelated ? 'md:h-60 h-96' : 'h-72'} object-cover object-center`} src={product?.imageCover} alt={product?.title} />
-        <div className='px-2 flex flex-col justify-between flex-grow bg-gray-100 relative'>
-          <div className='flex flex-col gap-1 w-full py-1'>
-            <p className='text-green-600'>{product?.category?.name}</p>
-            <h3 className='font-semibold line-clamp-2'>{product?.brand?.name} {product?.title}</h3>
+      }} className='product-card flex flex-col overflow-hidden bg-white rounded-4xl border border-cream-200 h-full cursor-pointer'>
+        <div className='overflow-hidden relative p-2'>
+          <img className={`w-full rounded-3xl ${isRelated ? 'md:h-56 h-80' : 'h-64'} object-cover object-center`} src={product?.imageCover} alt={product?.title} />
+          <span className='absolute top-4 left-4 bg-cream-50/90 backdrop-blur text-clay-600 rounded-full text-xs font-bold uppercase tracking-wide px-3 py-1 shadow-soft'>{product?.category?.name}</span>
+        </div>
+        <div className='px-4 flex flex-col justify-between flex-grow relative'>
+          <div className='flex flex-col gap-1 w-full pt-1 pb-1'>
+            <h3 className='font-display font-semibold text-base text-forest-800 line-clamp-2 leading-snug'>{product?.brand?.name} {product?.title}</h3>
           </div>
-          <div className='flex justify-between flex-wrap items-center w-full py-1 pb-2 relative'>
-            <p className=''>{product?.price} EGP</p>
-            <p className=''>{product?.ratingsAverage} <i className='fas fa-star text-yellow-600'></i></p>
+          <div className='flex justify-between flex-wrap items-center w-full py-1 pb-3 relative'>
+            <p className='font-display text-lg text-forest-700 font-semibold'>{product?.price} <span className='text-sm text-ink/50 font-sans'>EGP</span></p>
+            <p className='inline-flex items-center gap-1 text-clay-500 text-sm font-semibold'><i className='fas fa-star'></i> {product?.ratingsAverage}</p>
             {userLogin && <button onClick={(e) => {
               e.stopPropagation();
               if(btnLoading) return;
@@ -53,9 +55,9 @@ export default function SingleProductCol({ isRelated, product, related, layout }
                 setBtnLoading(false);
                 toast.error('Something went wrong');
               });
-            }} className={`lg:absolute duration-500 lg:opacity-0 lg:translate-y-full btn w-full bg-green-700 mt-2 bottom-2 shadow-lg z-10 ${!userLogin || btnLoading? 'cursor-default bg-opacity-50':''}`}>Add to cart</button>}
+            }} className={`lg:absolute duration-500 lg:opacity-0 lg:translate-y-4 btn-primary w-[calc(100%-2rem)] mt-2 bottom-3 z-10 ${!userLogin || btnLoading? 'cursor-default bg-opacity-60':''}`}>{btnLoading ? <i className='fas fa-spinner fa-spin'></i> : <><i className='fas fa-basket-shopping'></i> Add to cart</>}</button>}
           </div>
-          {userLogin && <div className='overlay absolute bg-gray-100 bg-opacity-0 lg:bg-opacity-50 top-0 bottom-0 left-0 right-0'></div>}
+          {userLogin && <div className='overlay absolute bg-white bg-opacity-0 lg:bg-opacity-70 top-0 bottom-0 left-0 right-0 rounded-b-4xl'></div>}
         </div>
       </div>
     </div>

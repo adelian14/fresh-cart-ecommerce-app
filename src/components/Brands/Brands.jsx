@@ -39,21 +39,27 @@ export default function Brands() {
 
   return <>
     <BrandSlider/>
-    <div className="row">
-      <h1 className='text-3xl font-semibold w-full mb-2'>Browse by brand</h1>
-      <div className='lg:w-[12%] w-1/4 my-6 border-r px-1'>
-        <h1 key='All' onClick={() => {
-          setActiveBrand('All');
-          setProducts(allProducts.filter(p => true));
-        }} className={`my-4 cursor-pointer p-1 rounded-md ${activeBrand == 'All' ? ' bg-green-600 text-white' : ''}`}>All brands</h1>
-        {brands?.data?.data?.map(brand => <h1 key={brand?._id} onClick={() => {
-          setActiveBrand(brand?.name);
-          setProducts(allProducts.filter(p => p?.brand?.name == brand?.name));
-        }} className={`my-4 cursor-pointer p-1 rounded-md ${activeBrand == brand?.name ? ' bg-green-600 text-white' : ''}`}>{brand?.name}</h1>)}
-      </div>
-      <div className='lg:w-[88%] w-3/4'>
-        <div className='row'>
-          {loading ? <Loading /> : products.length ? products?.map(product => <SingleProductCol layout={'brands/cats'} related={products.filter(p => p?.category?.name == product?.category?.name)} key={product?.id} product={product} />) : <h1 className='m-auto my-6 text-xl font-medium'>No products from this brand yet</h1>}
+    <div className="px-4 md:px-8 py-4">
+      <span className='eyebrow'>Curated makers</span>
+      <h1 className='section-title mt-2 mb-6'>Browse by brand</h1>
+      <div className='flex flex-col lg:flex-row gap-6'>
+        <aside className='lg:w-56 shrink-0'>
+          <div className='card p-3 lg:sticky lg:top-24'>
+            <p className='text-xs font-bold uppercase tracking-[0.18em] text-ink/40 px-3 pt-2 pb-1'>Brands</p>
+            <button key='All' onClick={() => {
+              setActiveBrand('All');
+              setProducts(allProducts.filter(p => true));
+            }} className={`block w-full text-left my-1 cursor-pointer px-3 py-2 rounded-full font-semibold transition-all ${activeBrand == 'All' ? 'bg-forest-600 text-cream-50 shadow-soft' : 'text-ink/70 hover:bg-forest-50 hover:text-forest-700'}`}>All brands</button>
+            {brands?.data?.data?.map(brand => <button key={brand?._id} onClick={() => {
+              setActiveBrand(brand?.name);
+              setProducts(allProducts.filter(p => p?.brand?.name == brand?.name));
+            }} className={`block w-full text-left my-1 cursor-pointer px-3 py-2 rounded-full font-semibold transition-all ${activeBrand == brand?.name ? 'bg-forest-600 text-cream-50 shadow-soft' : 'text-ink/70 hover:bg-forest-50 hover:text-forest-700'}`}>{brand?.name}</button>)}
+          </div>
+        </aside>
+        <div className='flex-1'>
+          <div className='flex flex-wrap -mx-2'>
+            {loading ? <Loading /> : products.length ? products?.map(product => <SingleProductCol layout={'brands/cats'} related={products.filter(p => p?.category?.name == product?.category?.name)} key={product?.id} product={product} />) : <h1 className='m-auto my-12 text-xl font-display text-ink/50'>No products from this brand yet</h1>}
+          </div>
         </div>
       </div>
     </div>

@@ -32,46 +32,46 @@ export default function CheckOut() {
   }
 
   return <>
-    <div className='lg:py-6 py-2 max-w-xl mx-auto'>
-      <h2 className='text-3xl font-bold mb-6 text-green-600'>Check Out</h2>
-      <form onSubmit={formik.handleSubmit}>
-        <div className="relative z-0 w-full mb-5 group">
-          <input
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            vlaue={formik.values.details}
-            name="details" id="details"
-            type="text" placeholder=' ' className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer" />
-          <label htmlFor="details" className=" absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-            Enter your details
-          </label>
+    <div className='py-8 max-w-lg mx-auto px-4'>
+      <div className='card overflow-hidden'>
+        <div className='bg-forest-700 text-cream-50 px-8 py-6'>
+          <span className='eyebrow text-clay-200 before:bg-clay-300'>Almost there</span>
+          <h2 className='font-display text-3xl font-semibold mt-2'>Delivery details</h2>
+          <p className='text-cream-100/70 text-sm mt-1'>Tell us where to bring your fresh goods.</p>
         </div>
-        <div className="relative z-0 w-full mb-5 group">
-          <input
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            vlaue={formik.values.phone}
-            name="phone" id="phone"
-            type="tel" placeholder=' ' className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer" />
-          <label htmlFor="phone" className=" absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-            Enter your phone
-          </label>
+        <div className='p-8'>
+        <form onSubmit={formik.handleSubmit}>
+          <div className="w-full mb-5">
+            <label htmlFor="details" className='field-label'>Address details</label>
+            <input
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              vlaue={formik.values.details}
+              name="details" id="details"
+              type="text" placeholder='Street, building, apartment…' className="field-input" />
+          </div>
+          <div className="w-full mb-5">
+            <label htmlFor="phone" className='field-label'>Phone number</label>
+            <input
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              vlaue={formik.values.phone}
+              name="phone" id="phone"
+              type="tel" placeholder='01xxxxxxxxx' className="field-input" />
+          </div>
+          <div className="w-full mb-6">
+            <label htmlFor="city" className='field-label'>City</label>
+            <input
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              vlaue={formik.values.city}
+              name="city" id="city"
+              type="text" placeholder='Your city' className="field-input" />
+          </div>
+          <button type="submit" className="btn-primary w-full text-base">{Loading ? <i className='fas fa-spinner fa-spin'></i> : <><i className='fas fa-lock'></i> Pay securely</>}</button>
+        </form>
         </div>
-        <div className="relative z-0 w-full mb-5 group">
-          <input
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            vlaue={formik.values.city}
-            name="city" id="city"
-            type="text" placeholder=' ' className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer" />
-          <label htmlFor="city" className=" absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-            Enter your city
-          </label>
-        </div>
-        <div className='flex items-center gap-3 flex-wrap'>
-          <button type="submit" className="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-cente">{Loading ? <i className='fas fa-spinner fa-spin'></i> : 'Checkout now'}</button>
-        </div>
-      </form>
+      </div>
     </div>
   </>
 }

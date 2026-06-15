@@ -55,17 +55,24 @@ export default function CategorySlider() {
   let categories = data?.data?.data;
 
   return <>
-    <div className="row">
-      <h1 className='text-3xl font-semibold w-full mb-2'>Product Categories</h1>
+    <div className="px-4 md:px-8 pt-12 pb-4 flex items-end justify-between flex-wrap gap-3">
+      <div>
+        <span className='eyebrow'>Shop by aisle</span>
+        <h1 className='section-title mt-2'>Explore our categories</h1>
+      </div>
     </div>
     {!isLoading &&
-      <div className='px-8'>
+      <div className='px-4 md:px-8 pb-4'>
         <div className=''>
           <Slider {...sliderSettings}>
             {categories.map(cat => {
-              return <div key={cat?._id}>
-                <img className='md:h-72 h-96 w-full object-cover object-center' src={cat?.image} alt={cat?.name} />
-                <h3 className='text-center text-xl my-3'>{cat?.name}</h3>
+              return <div key={cat?._id} className='px-2'>
+                <div className='group relative rounded-4xl overflow-hidden shadow-soft border border-cream-200 cursor-pointer'>
+                  <img className='md:h-72 h-96 w-full object-cover object-center transition-transform duration-500 group-hover:scale-105' src={cat?.image} alt={cat?.name} />
+                  <div className='absolute inset-x-0 bottom-0 bg-gradient-to-t from-forest-900/85 to-transparent pt-12 pb-4 px-4'>
+                    <h3 className='text-center text-cream-50 text-xl font-display font-semibold'>{cat?.name}</h3>
+                  </div>
+                </div>
               </div>
             })}
           </Slider>

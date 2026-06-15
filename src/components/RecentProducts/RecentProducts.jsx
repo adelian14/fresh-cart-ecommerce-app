@@ -51,8 +51,14 @@ export default function RecentProducts() {
 
 
   return <>
-    <div className="row">
-      <h1 className='text-3xl font-semibold w-full mb-2'>Recent Products</h1>
+    <div className='px-4 md:px-8 pt-12 pb-2 flex items-end justify-between flex-wrap gap-3'>
+      <div>
+        <span className='eyebrow'>Just in</span>
+        <h1 className='section-title mt-2'>Fresh off the shelf</h1>
+      </div>
+      <p className='text-ink/50 max-w-sm'>A handpicked taste of what's new across our aisles this week.</p>
+    </div>
+    <div className="row pt-2">
       {isLoading ? <Loading /> : products.map(product => <SingleProductCol related={data?.data?.data.filter(p => p?.category?.name == product?.category?.name)} key={product?.id} product={product} />)}
     </div>
   </>

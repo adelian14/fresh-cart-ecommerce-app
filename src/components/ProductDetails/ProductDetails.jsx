@@ -53,28 +53,37 @@ export default function ProductDetails() {
   if (productNotFound) return <Notfound msg={'Product not found'} />
   if (loading) return <Loading />
   return <>
-    <div className="row">
-      <h1 className='text-3xl font-semibold w-full md:hidden block'>{product?.brand?.name} {product?.title}</h1>
-      <p className='text-green-600 md:hidden block mb-4'>{product?.category?.name}, {product?.subcategory?.[0]?.name}</p>
-      <div className="md:w-[30%] w-[80%]">
-        <img ref={mainImage} src={product?.imageCover} alt={product?.title} className="w-full rounded-lg border-4 border-gray-200"></img>
-        <div className='flex flex-wrap gap-3 mt-3 px-2'>
-          {
-            product?.images?.map(image => <img key={image} onClick={() => {
-              mainImage.current.setAttribute('src', image);
-              setActiveImage(image);
-            }} className={`size-14 object-cover object-center rounded-md cursor-pointer ${image == activeImage ? 'border-2 border-green-500' : 'border-2'}`} src={image}></img>)
-          }
+    <div className="px-4 md:px-8 py-6">
+      <div className='card p-4 md:p-8 flex flex-col md:flex-row gap-8'>
+        {/* Gallery */}
+        <div className="md:w-[38%] w-full">
+          <div className='rounded-3xl overflow-hidden border border-cream-200 bg-cream-50'>
+            <img ref={mainImage} src={product?.imageCover} alt={product?.title} className="w-full object-cover object-center"></img>
+          </div>
+          <div className='flex flex-wrap gap-3 mt-4'>
+            {
+              product?.images?.map(image => <img key={image} onClick={() => {
+                mainImage.current.setAttribute('src', image);
+                setActiveImage(image);
+              }} className={`size-16 object-cover object-center rounded-2xl cursor-pointer transition-all ${image == activeImage ? 'ring-2 ring-clay-500 ring-offset-2 ring-offset-white' : 'ring-1 ring-cream-200 hover:ring-forest-300'}`} src={image}></img>)
+            }
+          </div>
         </div>
-      </div>
 
-      <div className='md:w-[70%] md:p-8 p-4 w-full'>
-        <h1 className='text-3xl font-semibold w-full hidden md:block'>{product?.brand?.name} {product?.title}</h1>
-        <p className='text-green-600 hidden md:block'>{product?.category?.name}, {product?.subcategory?.[0]?.name}</p>
-        <p className='text-gray-700 mt-4'>{product?.description}</p>
-        <div className='flex justify-between flex-wrap items-center w-full py-1 pb-2 relative my-3'>
-          <p className='text-xl font-semibold'>{product?.price} EGP</p>
-          <div className='w-full my-3'>
+        {/* Info */}
+        <div className='md:w-[62%] w-full'>
+          <p className='eyebrow'>{product?.category?.name} · {product?.subcategory?.[0]?.name}</p>
+          <h1 className='font-display text-3xl md:text-4xl font-semibold text-forest-800 mt-3 leading-tight'>{product?.brand?.name} {product?.title}</h1>
+
+          <div className='flex items-center gap-3 mt-4'>
+            <span className='inline-flex items-center gap-1.5 bg-clay-50 text-clay-600 rounded-full text-sm font-semibold px-3 py-1'><i className='fas fa-star'></i> {product?.ratingsAverage}</span>
+            <span className='inline-flex items-center bg-forest-50 text-forest-700 rounded-full text-sm font-semibold px-3 py-1'>{product?.sold} sold</span>
+          </div>
+
+          <p className='text-ink/60 leading-relaxed mt-5'>{product?.description}</p>
+
+          <div className='mt-6 pt-6 border-t border-cream-200 flex flex-wrap items-center gap-5'>
+            <p className='font-display text-4xl font-semibold text-forest-700'>{product?.price} <span className='text-lg text-ink/40 font-sans'>EGP</span></p>
             <button onClick={(e) => {
               e.stopPropagation();
               setClicked(true);
@@ -91,17 +100,19 @@ export default function ProductDetails() {
                   setBtnLoading(false);
                   toast.error('Something went wrong');
                 });
-            }} className={`duration-500 btn bg-green-700 ${!userLogin || btnLoading ? 'cursor-default bg-opacity-50' : ''} w-1/2 shadow-lg`}>Add to cart</button>
-            {!userLogin && clicked && <span className='mx-4 text-red-600 text-center'>You have to login first</span>}
-          </div>
-          <p className='px-3'>{product?.ratingsAverage} <i className='fas fa-star text-yellow-600'></i></p>
-          <p className='px-3'>Sold {product?.sold} units</p>
-          <div className="row w-full">
-            <h1 className='text-3xl font-semibold w-full mb-2'>Related Products</h1>
-            {newRelated.map(p => <SingleProductCol isRelated={true} related={relatedProducts} key={p?.id} product={p} />)}
+            }} className={`btn-primary text-base px-8 py-3 ${!userLogin || btnLoading ? 'cursor-default bg-opacity-60' : ''}`}>{btnLoading ? <i className='fas fa-spinner fa-spin'></i> : <><i className='fas fa-basket-shopping'></i> Add to cart</>}</button>
+            {!userLogin && clicked && <span className='text-clay-600 font-semibold'>Please log in to add items</span>}
           </div>
         </div>
       </div>
+
+      {newRelated.length > 0 && <div className="pt-12">
+        <span className='eyebrow'>You may also like</span>
+        <h2 className='section-title mt-2 mb-2'>Related products</h2>
+        <div className='flex flex-wrap -mx-2'>
+          {newRelated.map(p => <SingleProductCol isRelated={true} related={relatedProducts} key={p?.id} product={p} />)}
+        </div>
+      </div>}
     </div>
   </>
 }

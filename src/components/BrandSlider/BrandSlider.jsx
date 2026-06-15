@@ -55,17 +55,20 @@ export default function BrandSlider() {
   let brands = data?.data?.data;
 
   return <>
-    <div className="row">
-      <h1 className='text-3xl font-semibold w-full mb-2'>Shop your favourite brands</h1>
+    <div className="px-4 md:px-8 pt-8 pb-4">
+      <span className='eyebrow'>Names you trust</span>
+      <h1 className='section-title mt-2'>Shop your favourite brands</h1>
     </div>
     {!isLoading &&
-      <div className='px-8'>
+      <div className='px-4 md:px-8 pb-4'>
         <div className=''>
           <Slider {...sliderSettings}>
             {brands.map(brand => {
-              return <div key={brand?._id}>
-                <img className='md:h-56 h-72 w-full object-cover object-center' src={brand?.image} alt={brand?.name} />
-                <h3 className='text-center text-xl my-3'>{brand?.name}</h3>
+              return <div key={brand?._id} className='px-2'>
+                <div className='bg-white rounded-4xl border border-cream-200 shadow-soft overflow-hidden hover:shadow-lift transition-shadow'>
+                  <img className='md:h-56 h-72 w-full object-cover object-center' src={brand?.image} alt={brand?.name} />
+                  <h3 className='text-center text-lg font-display font-semibold text-forest-800 py-3'>{brand?.name}</h3>
+                </div>
               </div>
             })}
           </Slider>

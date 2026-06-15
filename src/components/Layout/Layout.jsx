@@ -11,9 +11,11 @@ export default function Layout() {
 
   return <>
     <Navbar></Navbar>
-    <div className="mx-auto lg:w-[95%] min-h-[85vh] my-6 py-6 pt-9">
-      <Outlet></Outlet>
-    </div>
+    <main className="min-h-screen">
+      <div className="mx-auto lg:w-[95%] min-h-[85vh] py-6 pt-24">
+        <Outlet></Outlet>
+      </div>
+    </main>
     <Footer></Footer>
   </>
 }
